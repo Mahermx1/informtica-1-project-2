@@ -11,9 +11,9 @@ pygame.display.set_caption('Battle Port Rotterdam')
 
 def intro():
     while not quitgame():
-        gameDisplay.blit(Images.gameMenu,[0,0])
+        gameDisplay.blit(Images.gameMenu, (0,0))
         Functions.screentext("arila", 115, "BattlePort", display_width/2, display_height/2, Colors.black)
-        Functions.button("Start",175,450,100,50,Colors.green,Colors.bright_green, name1)
+        Functions.button("Start",175,450,100,50,Colors.green,Colors.bright_green, player1)
         Functions.button("Highscore",295,450,100,50,Colors.blue,Colors.bright_blue,high_score)
         Functions.button("Rules",415,450,100,50,Colors.grey,Colors.white,rules)
         Functions.button("Quit",535,450,100,50,Colors.red,Colors.bright_red,quit)
@@ -88,65 +88,66 @@ def rules_en():
         pygame.display.update()
 
 
+
+saved_player1 = ""
+def player1():
+    global saved_player1
+    player1 = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == KEYDOWN:
+                if evt.unicode.isalpha():
+                    player1 += evt.unicode
+                    saved_player1 = player1
+                elif evt.key == K_BACKSPACE:
+                    player1 = player1[:-1]
+                    saved_player1 = player1
+                elif evt.key == K_SPACE:
+                    player1 += " "
+                    saved_player1 = player1
+            elif evt.type == QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.blit(Images.gameMenu, [0, 0])
+        Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
+        Functions.screentext("comicsansms", 50, "Choose player 1 name:", display_width/2, display_height/3.5, Colors.white)
+        Functions.screentext("comicsansms", 50, player1, display_width/2, display_height/2, Colors.white)
+        pygame.display.update()
+
+saved_player2 = ""
+def player2():
+    global saved_player2
+    player2 = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == KEYDOWN:
+                if evt.unicode.isalpha():
+                    player2 += evt.unicode
+                    saved_player2 = player2
+                elif evt.key == K_BACKSPACE:
+                    player2 = player2[:-1]
+                    saved_player2 = player2
+                elif evt.key == K_SPACE:
+                    player2 += " "
+                    saved_player2 = player2
+            elif evt.type == QUIT:
+                pygame.quit()
+                quit()
+
+        gameDisplay.blit(Images.gameMenu, [0, 0])
+        Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, gameBoard)
+        Functions.button("previous", 0, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player1)
+        Functions.screentext("comicsansms", 50, "Choose player 2 name:", display_width/2., display_height/3.5, Colors.white)
+        Functions.screentext("comicsansms", 50, player2, display_width/2, display_height/2, Colors.white)
+
+        pygame.display.update()
+
 def quitgame():
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             quit()
 
-
-saved_name1 = ""
-def name1():
-    global saved_name1
-    name1 = ""
-    while True:
-        for evt in pygame.event.get():
-            if evt.type == KEYDOWN:
-                if evt.unicode.isalpha():
-                    name1 += evt.unicode
-                    saved_name1 = name1
-                elif evt.key == K_BACKSPACE:
-                    name1 = name1[:-1]
-                    saved_name1 = name1
-                elif evt.key == K_SPACE:
-                    name1 += " "
-                    saved_name1 = name1
-            elif evt.type == QUIT:
-                pygame.quit()
-                quit()
-
-        gameDisplay.blit(Images.gameMenu, [0, 0])
-        Functions.button("Next", 700, 550, 100, 50, Colors.white, Colors.white, name2)
-        Functions.screentext("comicsansms", 50, "Choose player 1 name", display_width/2, display_height/4, Colors.white)
-        Functions.screentext("comicsansms", 50, name1, display_width/2, display_height/2, Colors.white)
-        pygame.display.update()
-
-saved_name2 = ""
-def name2():
-    global saved_name2
-    name2 = ""
-    while True:
-        for evt in pygame.event.get():
-            if evt.type == KEYDOWN:
-                if evt.unicode.isalpha():
-                    name2 += evt.unicode
-                    saved_name2 = name2
-                elif evt.key == K_BACKSPACE:
-                    name2 = name2[:-1]
-                    saved_name2 = name2
-                elif evt.key == K_SPACE:
-                    name2 += " "
-                    saved_name2 = name2
-            elif evt.type == QUIT:
-                pygame.quit()
-                quit()
-
-        gameDisplay.blit(Images.gameMenu, [0, 0])
-        Functions.button("Next", 700, 550, 100, 50, Colors.white, Colors.white, gameBoard)
-        Functions.button("previous", 0, 550, 100, 50, Colors.white, Colors.white, name1)
-        Functions.screentext("comicsansms", 50, "Choose player 2 name", display_width/2, display_height/4, Colors.white)
-        Functions.screentext("comicsansms", 50, name2, display_width/2, display_height/2, Colors.white)
-
-        pygame.display.update()
 intro()
 pygame.quit()
