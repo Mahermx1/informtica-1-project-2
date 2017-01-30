@@ -6,8 +6,6 @@ display_height = 600
 ship_width = 130
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
-def ship(x,y):
-    gameDisplay.blit(Images.shipImg,(x,y))
 
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
@@ -27,7 +25,7 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         if x + w > mouse[0] > x and y + h > mouse[1] > y:
             pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
             if click[0] == 1 and action != None:
-                time.sleep(0.12)
+                time.sleep(0.25)
                 action()
         else:
             pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
@@ -41,5 +39,4 @@ def button(msg,x,y,w,h,ic,ac,action=None):
 def message_to_screen(msg, color, x, y):
     screen_text = pygame.font.render(msg, True, color)
     gameDisplay.blit(screen_text, [x- x/2, y- y/2])
-
 

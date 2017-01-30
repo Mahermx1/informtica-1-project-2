@@ -1,4 +1,4 @@
-import pygame, Colors, Images, Functions
+import pygame, Colors, Images, Functions, Classes
 from pygame.locals import *
 
 pygame.init()
@@ -49,14 +49,13 @@ def gameBoard():
         for row in range(18):
             for column in range(19):
                 color = Colors.white
-                if grid[row][column] == 1:
-                    color = Colors.red
                 pygame.draw.rect(gameDisplay,color,
                                  [(grid_margin + grid_width) * column + grid_margin,
                                   (grid_margin + grid_height) * row + grid_margin,grid_width,grid_height])
-
-
+        player.turn
+        player.place_boat
         gameDisplay.blit(Images.shipImg,(670,450))
+        Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.bright_yellow, pause)
         Functions.button("Stop",670,550,130,50,Colors.red,Colors.bright_red, intro)
         pygame.display.flip()
 
@@ -87,7 +86,15 @@ def rules_en():
         Functions.button("Nederlands", 600, 550, 100, 50, Colors.red, Colors.bright_red, rules)
         pygame.display.update()
 
-
+def pause():
+    while not quitgame():
+        pygame.draw.rect(gameDisplay,Colors.bright_grey, (245, 145, 20*16, 20*16))
+        Functions.screentext("comicsansms", 50, "Paused", (display_width/2), (display_height/3), Colors.black)
+        Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.yellow, None)
+        Functions.button("Resume", 340, display_height*9/20, 120, 40,  Colors.green, Colors.bright_green, gameBoard)
+        Functions.button("Rules", 340, display_height*11/20, 120, 40,  Colors.blue, Colors.bright_blue, rules)
+        Functions.button("Quit", 340, display_height*13/20, 120, 40,  Colors.red, Colors.bright_red, intro)
+        pygame.display.flip()
 
 saved_player1 = ""
 def player1():
@@ -111,7 +118,7 @@ def player1():
 
         gameDisplay.blit(Images.gameMenu, [0, 0])
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
-        Functions.screentext("comicsansms", 50, "Choose player 1 name:", display_width/2, display_height/3.5, Colors.white)
+        Functions.screentext("comicsansms", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("comicsansms", 50, player1, display_width/2, display_height/2, Colors.white)
         pygame.display.update()
 
@@ -138,10 +145,61 @@ def player2():
         gameDisplay.blit(Images.gameMenu, [0, 0])
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, gameBoard)
         Functions.button("previous", 0, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player1)
-        Functions.screentext("comicsansms", 50, "Choose player 2 name:", display_width/2., display_height/3.5, Colors.white)
+        Functions.screentext("comicsansms", 50, "  Player 2 name:", display_width/2., display_height/3.5, Colors.white)
         Functions.screentext("comicsansms", 50, player2, display_width/2, display_height/2, Colors.white)
 
         pygame.display.update()
+
+class player():
+    def __init__(self):
+        self.active_player = 1
+        self.winner = None
+
+        self.turn = 0
+
+
+    def turn(self):
+        Functions.screentext("arial", 20, "player1", 625, 65, Colors.green if self.active_player == 1 else Colors.red)
+        Functions.screentext("arial", 20, "player2", 725, 65, Colors.green if self.active_player == 2 else Colors.red)
+
+    def place_boat(self):
+        click = pygame.mouse.get_pressed()
+        mouse = pygame.mouse.get_pos()
+        if self.turn <8:
+            if self.active_player == 1:
+                if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 468 and mouse[1] <= 554:
+
+                    self.turn += 1
+                    self.active_player += 1
+                    if self.turn == 1:
+                        x = mouse[0]
+                        gameDisplay.blit(Images.shipImg,(x,556))
+                    elif self.turn == 2:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 556)
+                    elif self.turn == 5:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 556)
+                    elif self.turn == 6:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 556)
+            elif self.active_player == 2:
+                if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 2 and mouse[1] <= 90:
+
+                    self.turn += 1
+                    self.active_player -= 1
+                    if self.turn == 3:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 46)
+                    elif self.turn == 4:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 46)
+                    elif self.turn == 7:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 46)
+                    elif self.turn == 8:
+                        x = mouse[0]
+                        Classes.boats(1, 1, x, 46)
 
 def quitgame():
     for event in pygame.event.get():
