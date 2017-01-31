@@ -52,11 +52,14 @@ def gameBoard():
                 pygame.draw.rect(gameDisplay,color,
                                  [(grid_margin + grid_width) * column + grid_margin,
                                   (grid_margin + grid_height) * row + grid_margin,grid_width,grid_height])
+
+
         player.turns()
         player.place_boat()
+        player.frame_boat()
         Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.bright_yellow, pause)
         Functions.button("Stop",670,550,130,50,Colors.red,Colors.bright_red, intro)
-        pygame.display.flip()
+        pygame.display.update()
 
 def high_score():
     while not quitgame():
@@ -93,7 +96,7 @@ def pause():
         Functions.button("Resume", 340, display_height*9/20, 120, 40,  Colors.green, Colors.bright_green, gameBoard)
         Functions.button("Rules", 340, display_height*11/20, 120, 40,  Colors.blue, Colors.bright_blue, rules)
         Functions.button("Main Menu", 340, display_height*13/20, 120, 40,  Colors.red, Colors.bright_red, intro)
-        pygame.display.flip()
+        pygame.display.update()
 
 saved_player1 = ""
 def player1():
@@ -156,6 +159,14 @@ class player():
 
         self.turn = 0
 
+        self.ship1 = False
+        self.ship2 = False
+        self.ship3 = False
+        self.ship4 = False
+        self.ship5 = False
+        self.ship6 = False
+        self.ship7 = False
+        self.ship8 = False
 
     def turns(self):
         pygame.draw.rect(gameDisplay,Colors.bright_grey, (600, 65, 12*12, 12*2))
@@ -166,7 +177,7 @@ class player():
     def place_boat(self):
         click = pygame.mouse.get_pressed()
         mouse = pygame.mouse.get_pos()
-        if self.turn <8:
+        if self.turn < 8:
             if self.active_player == 1:
                 if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 468 and mouse[1] <= 554:
 
@@ -174,16 +185,28 @@ class player():
                     self.active_player += 1
                     if self.turn == 1:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_big,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg1 = Classes.boats(Images.ship_red_big, 3, 3, x,(556-123))
+                        self.ship1 = True
                     elif self.turn == 3:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_medium,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg3 = Classes.boats(Images.ship_red_medium, 2, 2, x,(556-93))
+                        self.ship3 = True
                     elif self.turn == 5:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_medium,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg5 = Classes.boats(Images.ship_red_medium, 2, 2, x,(556-93))
+                        self.ship5 = True
                     elif self.turn == 7:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_small,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg7 = Classes.boats(Images.ship_red_small, 1, 1, x,(556-63))
+                        self.ship7 = True
             elif self.active_player == 2:
                 if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 2 and mouse[1] <= 90:
 
@@ -191,16 +214,28 @@ class player():
                     self.active_player -= 1
                     if self.turn == 2:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_big,(x,556-125))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg2 = Classes.boats(Images.ship_blue_small, 1, 1, x, 0)
+                        self.ship2 = True
                     elif self.turn == 4:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg4 = Classes.boats(Images.ship_blue_medium, 2, 2, x, 0)
+                        self.ship4 = True
                     elif self.turn == 6:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg6 = Classes.boats(Images.ship_blue_medium, 2, 2, x, 0)
+                        self.ship6 = True
                     elif self.turn == 8:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_small,(x,556))
+                        while (x - 362) % 28 != 0:
+                            x -=1
+                        self.boatimg8 = Classes.boats(Images.ship_blue_big, 3, 3, x, 0)
+                        self.ship8 = True
         else:
             if self.active_player == 1:
                 Functions.button("move", 605, 90, 75, 25, Colors.green, Colors.bright_green, None)
@@ -213,6 +248,24 @@ class player():
                 Functions.button("turn", 705, 115, 75, 25, Colors.blue, Colors.bright_blue, None)
                 Functions.button("attack", 705, 140, 75, 25, Colors.yellow, Colors.bright_yellow, None)
                 Functions.button("end turn", 705, 165, 75, 25, Colors.red, Colors.bright_red, None)
+
+    def frame_boat(self):
+        if self.ship1 == True:
+            self.boatimg1.drawboat()
+        if self.ship2 == True:
+            self.boatimg2.drawboat()
+        if self.ship3 == True:
+            self.boatimg3.drawboat()
+        if self.ship4 == True:
+            self.boatimg4.drawboat()
+        if self.ship5 == True:
+            self.boatimg5.drawboat()
+        if self.ship6 == True:
+            self.boatimg6.drawboat()
+        if self.ship7 == True:
+            self.boatimg7.drawboat()
+        if self.ship8 == True:
+            self.boatimg8.drawboat()
 
 
 def quitgame():
