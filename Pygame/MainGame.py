@@ -14,15 +14,15 @@ def intro():
         gameDisplay.blit(Images.gameMenu, (0,0))
         Functions.screentext("arila", 115, "BattlePort", display_width/2, display_height/2, Colors.black)
         Functions.button("Start",175,450,100,50,Colors.green,Colors.bright_green, player1)
-        Functions.button("Highscore",295,450,100,50,Colors.blue,Colors.bright_blue,high_score)
+        Functions.button("Highscore",295,450,100,50,Colors.blue,Colors.bright_blue, high_score)
         Functions.button("Rules",415,450,100,50,Colors.grey,Colors.white,rules)
         Functions.button("Quit",535,450,100,50,Colors.red,Colors.bright_red,quit)
         pygame.display.update()
 
 def gameBoard():
     gameDisplay.fill(Colors.grey)
-    grid_width = 30
-    grid_height = 30
+    grid_width = 27
+    grid_height = 27
     grid_margin = 1
 
 
@@ -46,15 +46,14 @@ def gameBoard():
                 grid[row][column] = 1
                 print("Click ", pos, "Grid coordinates: ", row, column)
 
-        for row in range(18):
-            for column in range(19):
+        for row in range(20):
+            for column in range(20):
                 color = Colors.white
                 pygame.draw.rect(gameDisplay,color,
                                  [(grid_margin + grid_width) * column + grid_margin,
                                   (grid_margin + grid_height) * row + grid_margin,grid_width,grid_height])
-        player.turn
-        player.place_boat
-        gameDisplay.blit(Images.shipImg,(670,450))
+        player.turns()
+        player.place_boat()
         Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.bright_yellow, pause)
         Functions.button("Stop",670,550,130,50,Colors.red,Colors.bright_red, intro)
         pygame.display.flip()
@@ -93,7 +92,7 @@ def pause():
         Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.yellow, None)
         Functions.button("Resume", 340, display_height*9/20, 120, 40,  Colors.green, Colors.bright_green, gameBoard)
         Functions.button("Rules", 340, display_height*11/20, 120, 40,  Colors.blue, Colors.bright_blue, rules)
-        Functions.button("Quit", 340, display_height*13/20, 120, 40,  Colors.red, Colors.bright_red, intro)
+        Functions.button("Main Menu", 340, display_height*13/20, 120, 40,  Colors.red, Colors.bright_red, intro)
         pygame.display.flip()
 
 saved_player1 = ""
@@ -118,8 +117,8 @@ def player1():
 
         gameDisplay.blit(Images.gameMenu, [0, 0])
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
-        Functions.screentext("comicsansms", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
-        Functions.screentext("comicsansms", 50, player1, display_width/2, display_height/2, Colors.white)
+        Functions.screentext("arial", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
+        Functions.screentext("arial", 50, player1, display_width/2, display_height/2, Colors.white)
         pygame.display.update()
 
 saved_player2 = ""
@@ -145,8 +144,8 @@ def player2():
         gameDisplay.blit(Images.gameMenu, [0, 0])
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, gameBoard)
         Functions.button("previous", 0, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player1)
-        Functions.screentext("comicsansms", 50, "  Player 2 name:", display_width/2., display_height/3.5, Colors.white)
-        Functions.screentext("comicsansms", 50, player2, display_width/2, display_height/2, Colors.white)
+        Functions.screentext("arial", 50, "  Player 2 name:", display_width/2, display_height/3.5, Colors.white)
+        Functions.screentext("arial", 50, player2, display_width/2, display_height/2, Colors.white)
 
         pygame.display.update()
 
@@ -158,9 +157,11 @@ class player():
         self.turn = 0
 
 
-    def turn(self):
-        Functions.screentext("arial", 20, "player1", 625, 65, Colors.green if self.active_player == 1 else Colors.red)
-        Functions.screentext("arial", 20, "player2", 725, 65, Colors.green if self.active_player == 2 else Colors.red)
+    def turns(self):
+        pygame.draw.rect(gameDisplay,Colors.bright_grey, (600, 65, 12*12, 12*2))
+        pygame.draw.rect(gameDisplay,Colors.bright_grey, (720, 65, 12*5.5, 12*2))
+        Functions.screentext("arial", 20, saved_player1, 640, 75, Colors.green if self.active_player == 1 else Colors.red)
+        Functions.screentext("arial", 20, saved_player2, 740, 75, Colors.green if self.active_player == 2 else Colors.red)
 
     def place_boat(self):
         click = pygame.mouse.get_pressed()
@@ -173,33 +174,46 @@ class player():
                     self.active_player += 1
                     if self.turn == 1:
                         x = mouse[0]
-                        gameDisplay.blit(Images.shipImg,(x,556))
-                    elif self.turn == 2:
+                        gameDisplay.blit(Images.ship_red_big,(x,556))
+                    elif self.turn == 3:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 556)
+                        gameDisplay.blit(Images.ship_red_medium,(x,556))
                     elif self.turn == 5:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 556)
-                    elif self.turn == 6:
+                        gameDisplay.blit(Images.ship_red_medium,(x,556))
+                    elif self.turn == 7:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 556)
+                        gameDisplay.blit(Images.ship_red_small,(x,556))
             elif self.active_player == 2:
                 if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 2 and mouse[1] <= 90:
 
                     self.turn += 1
                     self.active_player -= 1
-                    if self.turn == 3:
+                    if self.turn == 2:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 46)
+                        gameDisplay.blit(Images.ship_blue_big,(x,556-125))
                     elif self.turn == 4:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 46)
-                    elif self.turn == 7:
+                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
+                    elif self.turn == 6:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 46)
+                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
                     elif self.turn == 8:
                         x = mouse[0]
-                        Classes.boats(1, 1, x, 46)
+                        gameDisplay.blit(Images.ship_blue_small,(x,556))
+        else:
+            if self.active_player == 1:
+                Functions.button("move", 605, 90, 75, 25, Colors.green, Colors.bright_green, None)
+                Functions.button("turn", 605, 115, 75, 25, Colors.blue, Colors.bright_blue, None)
+                Functions.button("attack", 605, 140, 75, 25, Colors.yellow, Colors.bright_yellow, None)
+                Functions.button("end turn", 605, 165, 75, 25, Colors.red, Colors.bright_red, None)
+
+            elif self.active_player == 2:
+                Functions.button("move", 705, 90, 75, 25, Colors.green, Colors.bright_green, None)
+                Functions.button("turn", 705, 115, 75, 25, Colors.blue, Colors.bright_blue, None)
+                Functions.button("attack", 705, 140, 75, 25, Colors.yellow, Colors.bright_yellow, None)
+                Functions.button("end turn", 705, 165, 75, 25, Colors.red, Colors.bright_red, None)
+
 
 def quitgame():
     for event in pygame.event.get():
@@ -207,5 +221,6 @@ def quitgame():
             pygame.quit()
             quit()
 
+player = player()
 intro()
 pygame.quit()
