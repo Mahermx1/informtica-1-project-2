@@ -1,4 +1,4 @@
-import pygame, Colors, Images, Functions, Classes, time
+import pygame, Colors, Images, Functions, Classes
 from pygame.locals import *
 
 pygame.init()
@@ -7,7 +7,6 @@ display_height = 600
 event = pygame.event.get()
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Battle Port Rotterdam')
-gridImg = pygame.image.load("grid20.png")
 
 
 def intro():
@@ -22,9 +21,6 @@ def intro():
 
 def gameBoard():
     gameDisplay.fill(Colors.grey)
-    gameDisplay.blit(gridImg, [0, 0])
-    clock = pygame.time.Clock()
-
     grid_width = 27
     grid_height = 27
     grid_margin = 1
@@ -50,23 +46,17 @@ def gameBoard():
                 grid[row][column] = 1
                 print("Click ", pos, "Grid coordinates: ", row, column)
 
-        #for row in range(20):
-            #for column in range(20):
-                #color = Colors.white
-                #pygame.draw.rect(gameDisplay,color,
-                                     #[(grid_margin + grid_width) * column + grid_margin,
-                                      #(grid_margin + grid_height) * row + grid_margin,grid_width,grid_height])
-
-
-
-
+        for row in range(20):
+            for column in range(20):
+                color = Colors.white
+                pygame.draw.rect(gameDisplay,color,
+                                 [(grid_margin + grid_width) * column + grid_margin,
+                                  (grid_margin + grid_height) * row + grid_margin,grid_width,grid_height])
         player.turns()
         player.place_boat()
         Functions.button("pause", 670, 0, 130, 50,  Colors.yellow, Colors.bright_yellow, pause)
         Functions.button("Stop",670,550,130,50,Colors.red,Colors.bright_red, intro)
-
         pygame.display.flip()
-        clock.tick(60)
 
 def high_score():
     while not quitgame():
@@ -184,16 +174,16 @@ class player():
                     self.active_player += 1
                     if self.turn == 1:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_big,(x,556-125))
+                        gameDisplay.blit(Images.ship_red_big,(x,556))
                     elif self.turn == 3:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_medium,(x,556-125))
+                        gameDisplay.blit(Images.ship_red_medium,(x,556))
                     elif self.turn == 5:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_medium,(x,556-125))
+                        gameDisplay.blit(Images.ship_red_medium,(x,556))
                     elif self.turn == 7:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_red_small,(x,556-125))
+                        gameDisplay.blit(Images.ship_red_small,(x,556))
             elif self.active_player == 2:
                 if click[0] and mouse[0] >= 1 and mouse[0] <= 588 and mouse[1] >= 2 and mouse[1] <= 90:
 
@@ -201,16 +191,16 @@ class player():
                     self.active_player -= 1
                     if self.turn == 2:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_big,(x,0))
+                        gameDisplay.blit(Images.ship_blue_big,(x,556-125))
                     elif self.turn == 4:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_medium,(x,0))
+                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
                     elif self.turn == 6:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_medium,(x,0))
+                        gameDisplay.blit(Images.ship_blue_medium,(x,556))
                     elif self.turn == 8:
                         x = mouse[0]
-                        gameDisplay.blit(Images.ship_blue_small,(x,0))
+                        gameDisplay.blit(Images.ship_blue_small,(x,556))
         else:
             if self.active_player == 1:
                 Functions.button("move", 605, 90, 75, 25, Colors.green, Colors.bright_green, None)
