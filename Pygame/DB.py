@@ -8,10 +8,13 @@ except:
 cur = conn.cursor()
 try:
     cur.execute("""SELECT * from highscore""")
+    cur.execute("""SELECT * FROM public.highscore ORDER BY wins DESC """)
 except:
     print("I can't SELECT from bar")
 
 rows = cur.fetchall()
-print("\nRows: \n")
+print("Resultaten:")
 for row in rows:
-    print("   ", row[1])
+    result = (row[1],row[2],row[3])
+    #print(result)
+
