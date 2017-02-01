@@ -3,7 +3,7 @@ from pygame.locals import *
 
 pygame.init()
 
-sound = pygame.mixer.Sound("Epic Music Soundtracks .wav")
+sound = pygame.mixer.Sound("Epic Music.wav")
 sound.play()
 display_width = 800
 display_height = 600
@@ -83,7 +83,7 @@ def high_score():
 def rules():
     while not quitgame():
         gameDisplay.blit(Images.gameMenu, [0, 0])
-        gameDisplay.blit(Images.regelsnl, (20, 20))
+        gameDisplay.blit(Images.regelsnl, (0, 0))
         Functions.button("Terug", 700, 550, 100, 50, Colors.red, Colors.bright_red, intro)
         Functions.button("English", 600, 550, 100, 50, Colors.red, Colors.bright_red, rules_en)
         pygame.display.update()
@@ -93,7 +93,7 @@ def rules():
 def rules_en():
     while not quitgame():
         gameDisplay.blit(Images.gameMenu, [0, 0])
-        gameDisplay.blit(Images.regelsen, (20, 20))
+        gameDisplay.blit(Images.regelsen, (0, 0))
         Functions.button("Terug", 700, 550, 100, 50, Colors.red, Colors.bright_red, intro)
         Functions.button("Nederlands", 600, 550, 100, 50, Colors.red, Colors.bright_red, rules)
         pygame.display.update()
