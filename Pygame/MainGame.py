@@ -65,16 +65,17 @@ def high_score():
     while not quitgame():
         gameDisplay.blit(Images.gameMenu,[0,0])
         Functions.screentext("arial", 80, "Highscore", display_width / 2, display_height - 400, Colors.black)
-
+        heighthighscore = 300
         #highscore_list = DB.result
         for row in DB.rows:
             res =           str(row[1])
             res += '      '+str(row[2])
             res += '      '+str(row[3])
 
-            print(row)
+            #print(row)
 
-            Functions.screentext("arial", 30,res, display_width / 2, display_height - 300, Colors.black)
+            Functions.screentext("arial", 30,res, display_width / 2, display_height - heighthighscore, Colors.black)
+            heighthighscore -=30
 
         Functions.button("Terug",700,550,100,50,Colors.red,Colors.bright_red,intro)
         pygame.display.update()
