@@ -129,6 +129,9 @@ def player1():
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
         Functions.screentext("arial", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player1, display_width/2, display_height/2, Colors.white)
+
+
+        checkName()
         pygame.display.update()
 
 saved_player2 = ""
@@ -157,7 +160,23 @@ def player2():
         Functions.screentext("arial", 50, "  Player 2 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player2, display_width/2, display_height/2, Colors.white)
 
+        checkName()
         pygame.display.update()
+
+def checkName():
+    loop = True
+    while loop:
+        for row in DB.rows:
+            #print(saved_player1,row[1])
+            if str(saved_player1) == str(row[1]):
+                print("Gelijk!")
+                loop = False
+            elif str(saved_player2) == str(row[2]):
+                print("Gelijk!")
+                loop = False
+
+            else:
+                loop = False
 
 class Player():
     def __init__(self):
