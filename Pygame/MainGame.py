@@ -1,7 +1,10 @@
-import pygame, Colors, Images, Functions, Classes, time
+import pygame, Colors, Images, Functions, Classes, time, pygame.mixer
 from pygame.locals import *
 
 pygame.init()
+
+sound = pygame.mixer.Sound("Epic Music Soundtracks .wav")
+sound.play()
 display_width = 800
 display_height = 600
 event = pygame.event.get()
@@ -129,9 +132,6 @@ def player1():
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
         Functions.screentext("arial", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player1, display_width/2, display_height/2, Colors.white)
-
-
-        checkName()
         pygame.display.update()
 
 saved_player2 = ""
@@ -160,23 +160,7 @@ def player2():
         Functions.screentext("arial", 50, "  Player 2 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player2, display_width/2, display_height/2, Colors.white)
 
-        checkName()
         pygame.display.update()
-
-def checkName():
-    loop = True
-    while loop:
-        for row in DB.rows:
-            #print(saved_player1,row[1])
-            if str(saved_player1) == str(row[1]):
-                print("Gelijk!")
-                loop = False
-            elif str(saved_player2) == str(row[2]):
-                print("Gelijk!")
-                loop = False
-
-            else:
-                loop = False
 
 class Player():
     def __init__(self):
@@ -769,47 +753,47 @@ class Player():
                 self.draw_rect(Colors.bright_red, (self.shipimg7.x + 28), (self.shipimg7.y + 28))
                 self.draw_rect(Colors.bright_red, (self.shipimg7.x + 56), (self.shipimg7.y + 28))
 
-        elif self.ship_attackpower == 2:
+        elif self.ship_attackpower == 6:
             if self.shipimg2.attackpower != 0:
-                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y - 28))
-                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y - 56))
-                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y + 56))
-                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y + 84))
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 28), self.shipimg2.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 56), self.shipimg2.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 28), (self.shipimg2.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 56), (self.shipimg2.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 28), self.shipimg2.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 56), self.shipimg2.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 28), (self.shipimg2.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 56), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y - 28))
+                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y - 56))
+                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y + 56))
+                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y + 84))
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 28), self.shipimg6.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 56), self.shipimg6.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 28), (self.shipimg6.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 56), (self.shipimg6.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 28), self.shipimg6.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 56), self.shipimg6.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 28), (self.shipimg6.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 56), (self.shipimg6.y + 28))
 
-        elif self.ship_attackpower == 3:
+        elif self.ship_attackpower == 5:
             if self.shipimg3.attackpower != 0:
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 28))
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 56))
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 84))
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 84))
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 112))
-                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 140))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), self.shipimg3.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), (self.shipimg3.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), (self.shipimg3.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), (self.shipimg3.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), (self.shipimg3.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), (self.shipimg3.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), (self.shipimg3.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 28))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 56))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 84))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 84))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 112))
+                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 140))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), self.shipimg5.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), (self.shipimg5.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), (self.shipimg5.y + 56))
 
         elif self.ship_attackpower == 4:
             if self.shipimg4.attackpower != 0:
@@ -838,59 +822,59 @@ class Player():
                 self.draw_rect(Colors.bright_red, (self.shipimg4.x - 56), (self.shipimg4.y + 56))
                 self.draw_rect(Colors.bright_red, (self.shipimg4.x - 84), (self.shipimg4.y + 56))
 
-        elif self.ship_attackpower == 5:
+        elif self.ship_attackpower == 3:
             if self.shipimg5.attackpower != 0:
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 28))
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 56))
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y - 84))
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 84))
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 112))
-                self.draw_rect(Colors.bright_red, self.shipimg5.x, (self.shipimg5.y + 140))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), self.shipimg5.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), (self.shipimg5.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 28), (self.shipimg5.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 56), (self.shipimg5.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x + 84), (self.shipimg5.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 28), (self.shipimg5.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 56), (self.shipimg5.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg5.x - 84), (self.shipimg5.y + 56))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 28))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 56))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y - 84))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 84))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 112))
+                self.draw_rect(Colors.bright_red, self.shipimg3.x, (self.shipimg3.y + 140))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), self.shipimg3.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), (self.shipimg3.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 28), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 56), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x + 84), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 28), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 56), (self.shipimg3.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg3.x - 84), (self.shipimg3.y + 56))
 
-        elif self.ship_attackpower == 6:
+        elif self.ship_attackpower == 2:
             if self.shipimg6.attackpower != 0:
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y - 28))
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y - 56))
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y - 84))
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y + 84))
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y + 112))
-                self.draw_rect(Colors.bright_red, self.shipimg6.x, (self.shipimg6.y + 140))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 28), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 56), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 84), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 28), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 56), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 84), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 28), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 56), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 84), self.shipimg6.y)
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 28), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 56), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 84), (self.shipimg6.y + 28))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 28), (self.shipimg6.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 56), (self.shipimg6.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x + 84), (self.shipimg6.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 28), (self.shipimg6.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 56), (self.shipimg6.y + 56))
-                self.draw_rect(Colors.bright_red, (self.shipimg6.x - 84), (self.shipimg6.y + 56))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y - 28))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y - 56))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y - 84))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y + 84))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y + 112))
+                self.draw_rect(Colors.bright_red, self.shipimg2.x, (self.shipimg2.y + 140))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 28), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 56), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 84), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 28), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 56), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 84), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 28), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 56), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 84), self.shipimg2.y)
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 28), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 56), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 84), (self.shipimg2.y + 28))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 28), (self.shipimg2.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 56), (self.shipimg2.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x + 84), (self.shipimg2.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 28), (self.shipimg2.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 56), (self.shipimg2.y + 56))
+                self.draw_rect(Colors.bright_red, (self.shipimg2.x - 84), (self.shipimg2.y + 56))
 
         elif self.ship_attackpower == 1:
             if self.shipimg7.attackpower != 0:
@@ -981,199 +965,199 @@ class Player():
     def draw_rect(self, color, x, y):
         if x >= 0 and x < 560 and y >= 0 and y < 560:
             pygame.draw.rect(gameDisplay, color,(x, y, 27,27))
-            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg2.healthpoints != 0 or self.ship_attackpower == 2 and self.shipimg1.attackpower != 0  and self.shipimg2.healthpoints != 0:
+            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg2.healthpoints != 0:
                 if x + 27 > self.shipimg2.x + 14 > x and y + 27 > self.shipimg2.y + 14 > y or x + 27 > self.shipimg2.x + 14 > x and y + 27 > self.shipimg2.y + 39 > y:
                     self.shipimg2.healthpoints -= 1
                     self.shipimg1.attackpower -= 1
 
 
-            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg4.healthpoints != 0 or self.ship_attackpower == 2 and self.shipimg1.attackpower != 0 and self.shipimg4.healthpoints != 0:
+            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg4.healthpoints != 0:
                 if x + 27 > self.shipimg4.x + 14 > x and y + 27 > self.shipimg4.y + 14 > y or x + 27 > self.shipimg4.x + 14 > x and y + 27 > self.shipimg4.y + 39 > y or x + 27 > self.shipimg4.x + 14 > x and y + 27 > self.shipimg4.y + 112 > y:
                     self.shipimg4.healthpoints -= 1
                     self.shipimg1.attackpower -= 1
 
 
-            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg6.healthpoints != 0 or self.ship_attackpower == 2 and self.shipimg1.attackpower != 0 and self.shipimg6.healthpoints != 0:
+            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg6.healthpoints != 0:
                 if x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 14 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 39 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 112 > y:
                     self.shipimg6.healthpoints -= 1
                     self.shipimg1.attackpower -= 1
 
 
-            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg8.healthpoints != 0 or self.ship_attackpower == 2 and self.shipimg1.attackpower != 0 and self.shipimg8.healthpoints != 0:
+            if self.ship_attackpower == 1 and self.shipimg1.attackpower != 0 and self.shipimg8.healthpoints != 0:
                 if x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 14 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 39 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 112 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 98 > y:
                     self.shipimg8.healthpoints -= 1
                     self.shipimg1.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 5 and self.shipimg3.attackpower != 0 and self.shipimg2.healthpoints != 0 or self.ship_attackpower == 6 and self.shipimg3.attackpower != 0 and self.shipimg2.healthpoints != 0:
+            if self.ship_attackpower == 3 and self.shipimg3.attackpower != 0 and self.shipimg2.healthpoints != 0:
                 if x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 14 > y or x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 39 > y:
                     self.shipimg2.healthpoints -= 1
                     self.shipimg3.attackpower -= 1
 
 
-            if self.ship_attackpower == 5 and self.shipimg3.attackpower != 0 and self.shipimg4.healthpoints != 0 or self.ship_attackpower == 6 and self.shipimg3.attackpower != 0 and self.shipimg4.healthpoints != 0:
+            if self.ship_attackpower == 3 and self.shipimg3.attackpower != 0 and self.shipimg4.healthpoints != 0:
                 if x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 14 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 39 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 112 > y:
                     self.shipimg4.healthpoints -= 1
                     self.shipimg3.attackpower -= 1
 
 
-            if self.ship_attackpower == 5 and self.shipimg3.attackpower != 0 and self.shipimg6.healthpoints != 0 or self.ship_attackpower == 6 and self.shipimg3.attackpower != 0 and self.shipimg6.healthpoints != 0:
+            if self.ship_attackpower == 3 and self.shipimg3.attackpower != 0 and self.shipimg6.healthpoints != 0:
                 if x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 14 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 39 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 112 > y:
                     self.shipimg6.healthpoints -= 1
                     self.shipimg3.attackpower -= 1
 
 
-            if self.ship_attackpower == 5 and self.shipimg3.attackpower != 0 and self.shipimg8.healthpoints != 0 or self.ship_attackpower == 6 and self.shipimg3.attackpower != 0 and self.shipimg8.healthpoints != 0:
+            if self.ship_attackpower == 3 and self.shipimg3.attackpower != 0 and self.shipimg8.healthpoints != 0:
                 if x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 14 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 39 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 112 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 98 > y:
                     self.shipimg8.healthpoints -= 1
                     self.shipimg3.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 9 and self.shipimg5.attackpower != 0 and self.shipimg2.healthpoints != 0 or self.ship_attackpower == 10 and self.shipimg5.attackpower != 0 and self.shipimg2.healthpoints != 0:
+            if self.ship_attackpower == 5 and self.shipimg5.attackpower != 0 and self.shipimg2.healthpoints != 0:
                 if x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 14 > y or x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 39 > y:
                     self.shipimg2.healthpoints -= 1
                     self.shipimg5.attackpower -= 1
 
 
-            if self.ship_attackpower == 9 and self.shipimg5.attackpower != 0 and self.shipimg4.healthpoints != 0 or self.ship_attackpower == 10 and self.shipimg5.attackpower != 0 and self.shipimg4.healthpoints != 0:
+            if self.ship_attackpower == 5 and self.shipimg5.attackpower != 0 and self.shipimg4.healthpoints != 0:
                 if x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 14 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 39 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 112 > y:
                     self.shipimg4.healthpoints -= 1
                     self.shipimg5.attackpower -= 1
 
 
-            if self.ship_attackpower == 9 and self.shipimg5.attackpower != 0 and self.shipimg6.healthpoints != 0 or self.ship_attackpower == 10 and self.shipimg5.attackpower != 0 and self.shipimg6.healthpoints != 0:
+            if self.ship_attackpower == 5 and self.shipimg5.attackpower != 0 and self.shipimg6.healthpoints != 0:
                 if x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 14 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 39 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 112 > y:
                     self.shipimg6.healthpoints -= 1
                     self.shipimg5.attackpower -= 1
 
 
-            if self.ship_attackpower == 9 and self.shipimg5.attackpower != 0 and self.shipimg8.healthpoints != 0 or self.ship_attackpower == 10 and self.shipimg5.attackpower != 0 and self.shipimg8.healthpoints != 0:
+            if self.ship_attackpower == 5 and self.shipimg5.attackpower != 0 and self.shipimg8.healthpoints != 0:
                 if x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 14 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 39 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 112 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 98 > y:
                     self.shipimg8.healthpoints -= 1
                     self.shipimg5.attackpower -= 1
 
 
-            if self.ship_attackpower == 13 and self.shipimg7.attackpower != 0 and self.shipimg2.healthpoints != 0 or self.ship_attackpower == 14 and self.shipimg7.attackpower != 0 and self.shipimg2.healthpoints != 0:
+            if self.ship_attackpower == 7 and self.shipimg7.attackpower != 0 and self.shipimg2.healthpoints != 0:
                 if x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 14 > y or x+27 > self.shipimg2.x + 14 > x and y+27 > self.shipimg2.y + 39 > y:
                     self.shipimg2.healthpoints -= 1
                     self.shipimg7.attackpower -= 1
 
 
-            if self.ship_attackpower == 13 and self.shipimg7.attackpower != 0 and self.shipimg4.healthpoints != 0 or self.ship_attackpower == 14 and self.shipimg7.attackpower != 0 and self.shipimg4.healthpoints != 0:
+            if self.ship_attackpower == 7 and self.shipimg7.attackpower != 0 and self.shipimg4.healthpoints != 0:
                 if x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 14 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 39 > y or x+27 > self.shipimg4.x + 14 > x and y+27 > self.shipimg4.y + 112 > y:
                     self.shipimg4.healthpoints -= 1
                     self.shipimg7.attackpower -= 1
 
 
-            if self.ship_attackpower == 13 and self.shipimg7.attackpower != 0 and self.shipimg6.healthpoints != 0 or self.ship_attackpower == 14 and self.shipimg7.attackpower != 0 and self.shipimg6.healthpoints != 0:
+            if self.ship_attackpower == 7 and self.shipimg7.attackpower != 0 and self.shipimg6.healthpoints != 0:
                 if x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 14 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 39 > y or x+27 > self.shipimg6.x + 14 > x and y+27 > self.shipimg6.y + 112 > y:
                     self.shipimg6.healthpoints -= 1
                     self.shipimg7.attackpower -= 1
 
 
-            if self.ship_attackpower == 13 and self.shipimg7.attackpower != 0 and self.shipimg8.healthpoints != 0 or self.ship_attackpower == 14 and self.shipimg7.attackpower != 0 and self.shipimg8.healthpoints != 0:
+            if self.ship_attackpower == 7 and self.shipimg7.attackpower != 0 and self.shipimg8.healthpoints != 0:
                 if x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 14 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 39 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 112 > y or x+27 > self.shipimg8.x + 14 > x and y+27 > self.shipimg8.y + 98 > y:
                     self.shipimg8.healthpoints -= 1
                     self.shipimg7.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 3 and self.shipimg2.attackpower != 0 and self.shipimg1.healthpoints != 0 or self.ship_attackpower == 4 and self.shipimg2.attackpower != 0 and self.shipimg1.healthpoints != 0:
+            if self.ship_attackpower == 2 and self.shipimg2.attackpower != 0 and self.shipimg1.healthpoints != 0:
                 if x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 14 > y or x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 39 > y:
                     self.shipimg1.healthpoints -= 1
                     self.shipimg2.attackpower -= 1
 
 
-            if self.ship_attackpower == 3 and self.shipimg2.attackpower != 0 and self.shipimg3.healthpoints != 0 or self.ship_attackpower == 4 and self.shipimg2.attackpower != 0 and self.shipimg3.healthpoints != 0:
+            if self.ship_attackpower == 2 and self.shipimg2.attackpower != 0 and self.shipimg3.healthpoints != 0:
                 if x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 14 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 39 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 70 > y:
                     self.shipimg3.healthpoints -= 1
                     self.shipimg2.attackpower -= 1
 
 
-            if self.ship_attackpower == 3 and self.shipimg2.attackpower != 0 and self.shipimg5.healthpoints != 0 or self.ship_attackpower == 4 and self.shipimg2.attackpower != 0 and self.shipimg5.healthpoints != 0:
+            if self.ship_attackpower == 2 and self.shipimg2.attackpower != 0 and self.shipimg5.healthpoints != 0 :
                 if x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 14 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 39 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 70 > y:
                     self.shipimg5.healthpoints -= 1
                     self.shipimg2.attackpower -= 1
 
 
-            if self.ship_attackpower == 3 and self.shipimg2.attackpower != 0 and self.shipimg7.healthpoints != 0 or self.ship_attackpower == 4 and self.shipimg2.attackpower != 0 and self.shipimg7.healthpoints != 0:
+            if self.ship_attackpower == 2 and self.shipimg2.attackpower != 0 and self.shipimg7.healthpoints != 0:
                 if x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 14 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 39 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 70 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 98 > y:
                     self.shipimg7.healthpoints -= 1
                     self.shipimg2.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 7 and self.shipimg4.attackpower != 0 and self.shipimg1.healthpoints != 0 or self.ship_attackpower == 8 and self.shipimg4.attackpower != 0 and self.shipimg1.healthpoints != 0:
+            if self.ship_attackpower == 4 and self.shipimg4.attackpower != 0 and self.shipimg1.healthpoints != 0:
                 if x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 14 > y or x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 39 > y:
                     self.shipimg1.healthpoints -= 1
                     self.shipimg4.attackpower -= 1
 
 
-            if self.ship_attackpower == 7 and self.shipimg4.attackpower != 0 and self.shipimg3.healthpoints != 0 or self.ship_attackpower == 8 and self.shipimg4.attackpower != 0 and self.shipimg3.healthpoints != 0:
+            if self.ship_attackpower == 4 and self.shipimg4.attackpower != 0 and self.shipimg3.healthpoints != 0:
                 if x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 14 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 39 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 70 > y:
                     self.shipimg3.healthpoints -= 1
                     self.shipimg4.attackpower -= 1
 
 
-            if self.ship_attackpower == 7 and self.shipimg4.attackpower != 0 and self.shipimg5.healthpoints != 0 or self.ship_attackpower == 8 and self.shipimg4.attackpower != 0 and self.shipimg5.healthpoints != 0:
+            if self.ship_attackpower == 4 and self.shipimg4.attackpower != 0 and self.shipimg5.healthpoints != 0:
                 if x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 14 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 39 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 70 > y:
                     self.shipimg5.healthpoints -= 1
                     self.shipimg4.attackpower -= 1
 
 
-            if self.ship_attackpower == 7 and self.shipimg4.attackpower != 0 and self.shipimg7.healthpoints != 0 or self.ship_attackpower == 8 and self.shipimg4.attackpower != 0 and self.shipimg7.healthpoints != 0:
+            if self.ship_attackpower == 4 and self.shipimg4.attackpower != 0 and self.shipimg7.healthpoints != 0:
                 if x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 14 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 39 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 70 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 98 > y:
                     self.shipimg7.healthpoints -= 1
                     self.shipimg4.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 11 and self.shipimg6.attackpower != 0 and self.shipimg1.healthpoints != 0 or self.ship_attackpower == 12 and self.shipimg6.attackpower != 0 and self.shipimg1.healthpoints != 0:
+            if self.ship_attackpower == 6 and self.shipimg6.attackpower != 0 and self.shipimg1.healthpoints != 0:
                 if x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 14 > y or x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 39 > y:
                     self.shipimg1.healthpoints -= 1
                     self.shipimg6.attackpower -= 1
 
 
-            if self.ship_attackpower == 11 and self.shipimg6.attackpower != 0 and self.shipimg3.healthpoints != 0 or self.ship_attackpower == 12 and self.shipimg6.attackpower != 0 and self.shipimg3.healthpoints != 0:
+            if self.ship_attackpower == 6 and self.shipimg6.attackpower != 0 and self.shipimg3.healthpoints != 0:
                 if x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 14 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 39 > y or x+44 > self.shipimg3.x + 22 > x and y+44 > self.shipimg3.y + 70 > y:
                     self.shipimg3.healthpoints -= 1
                     self.shipimg6.attackpower -= 1
 
 
-            if self.ship_attackpower == 11 and self.shipimg6.attackpower != 0 and self.shipimg5.healthpoints != 0 or self.ship_attackpower == 12 and self.shipimg6.attackpower != 0 and self.shipimg5.healthpoints != 0:
+            if self.ship_attackpower == 6 and self.shipimg6.attackpower != 0 and self.shipimg5.healthpoints != 0:
                 if x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 14 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 39 > y or x+44 > self.shipimg5.x + 22 > x and y+44 > self.shipimg5.y + 70 > y:
                     self.shipimg5.healthpoints -= 1
                     self.shipimg6.attackpower -= 1
 
 
-            if self.ship_attackpower == 11 and self.shipimg6.attackpower != 0 and self.shipimg7.healthpoints != 0 or self.ship_attackpower == 12 and self.shipimg6.attackpower != 0 and self.shipimg7.healthpoints != 0:
+            if self.ship_attackpower == 6 and self.shipimg6.attackpower != 0 and self.shipimg7.healthpoints != 0:
                 if x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 14 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 39 > y or x+44 > self.shipimg7.x + 22 > x and y+44 > self.shipimg7.y + 70 > y or x+44 > self.shipimg7.x + 22 > x and y+44 > self.shipimg7.y + 98 > y:
                     self.shipimg7.healthpoints -= 1
                     self.shipimg6.attackpower -= 1
 
 
 
-            if self.ship_attackpower == 15 and self.shipimg8.attackpower != 0 and self.shipimg1.healthpoints != 0 or self.ship_attackpower == 16 and self.shipimg8.attackpower != 0 and self.shipimg1.healthpoints != 0:
+            if self.ship_attackpower == 8 and self.shipimg8.attackpower != 0 and self.shipimg1.healthpoints != 0:
                 if x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 14 > y or x+27 > self.shipimg1.x + 14 > x and y+27 > self.shipimg1.y + 39 > y:
                     self.shipimg1.healthpoints -= 1
                     self.shipimg8.attackpower -= 1
 
 
-            if self.ship_attackpower == 15 and self.shipimg8.attackpower != 0 and self.shipimg3.healthpoints != 0 or self.ship_attackpower == 16 and self.shipimg8.attackpower != 0 and self.shipimg3.healthpoints != 0:
+            if self.ship_attackpower == 8 and self.shipimg8.attackpower != 0 and self.shipimg3.healthpoints != 0:
                 if x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 14 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 39 > y or x+27 > self.shipimg3.x + 14 > x and y+27 > self.shipimg3.y + 70 > y:
                     self.shipimg3.healthpoints -= 1
                     self.shipimg8.attackpower -= 1
 
 
-            if self.ship_attackpower == 15 and self.shipimg8.attackpower != 0 and self.shipimg5.healthpoints != 0 or self.ship_attackpower == 16 and self.shipimg8.attackpower != 0 and self.shipimg5.healthpoints != 0:
+            if self.ship_attackpower == 8 and self.shipimg8.attackpower != 0 and self.shipimg5.healthpoints != 0:
                 if x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 14 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 39 > y or x+27 > self.shipimg5.x + 14 > x and y+27 > self.shipimg5.y + 70 > y:
                     self.shipimg5.healthpoints -= 1
                     self.shipimg8.attackpower -= 1
 
 
-            if self.ship_attackpower == 15 and self.shipimg8.attackpower != 0 and self.shipimg7.healthpoints != 0 or self.ship_attackpower == 16 and self.shipimg8.attackpower != 0 and self.shipimg7.healthpoints != 0:
+            if self.ship_attackpower == 8 and self.shipimg8.attackpower != 0 and self.shipimg7.healthpoints != 0:
                 if x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 14 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 39 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 70 > y or x+27 > self.shipimg7.x + 14 > x and y+27 > self.shipimg7.y + 98 > y:
                     self.shipimg7.healthpoints -= 1
                     self.shipimg8.attackpower -= 1
