@@ -1,6 +1,7 @@
 import pygame
 
 gameMenu = pygame.image.load("game-menu.jpg")
+highscoreMenu = pygame.image.load("highscore-menu.jpg")
 regelsnl = pygame.image.load("RegelsNederlands.png")
 regelsen = pygame.image.load("RegelsEngels.png")
 ship_red_big = pygame.image.load("red-big.png")
