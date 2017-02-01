@@ -63,16 +63,24 @@ def gameBoard():
 
 def high_score():
     while not quitgame():
-        gameDisplay.blit(Images.gameMenu,[0,0])
-        Functions.screentext("arial", 80, "Highscore", display_width / 2, display_height - 400, Colors.black)
+        gameDisplay.blit(Images.highscoreMenu,[0,0])
+        Functions.screentext("arial", 80, "Highscore", display_width / 2, display_height - 430, Colors.black)
         heighthighscore = 300
+        Functions.screentext("Arial", 40, "Name", 200, display_height - 340, Colors.bright_blue)
+        Functions.screentext("Arial", 40, "Wins", 360, display_height - 340, Colors.green)
+        Functions.screentext("Arial", 40, "Loses", 510, display_height - 340, Colors.red)
+        Functions.screentext("Arial", 30, "KD Ratio", 630, display_height - 340, Colors.bright_yellow)
         #highscore_list = DB.result
+        spaces = '               '
         for row in DB.rows:
-            res =           str(row[1])
-            res += '      '+str(row[2])
-            res += '      '+str(row[3])
-
-            #print(row)
+            res =                    str(row[1])
+            res += '               '+str(row[2])
+            res += '               '+str(row[3])
+            #print(len(row[1]))
+            if row[2] != 0 and row[3] != 0:
+                res += '             '+str(format(row[2] / (row[3]), '.2f'))
+            else:
+                res += '           '+str(row[2])
 
             Functions.screentext("arial", 30,res, display_width / 2, display_height - heighthighscore, Colors.black)
             heighthighscore -=30
