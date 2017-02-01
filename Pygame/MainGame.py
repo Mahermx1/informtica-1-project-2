@@ -1,4 +1,4 @@
-import pygame, Colors, Images, Functions, Classes, time, pygame.mixer
+import pygame, Colors, Images, Functions, Classes, time, pygame.mixer, DB
 from pygame.locals import *
 
 pygame.init()
@@ -72,13 +72,33 @@ def gameBoard():
         pygame.display.update()
 
 def high_score():
-    while not quitgame():
-        gameDisplay.blit(Images.gameMenu,[0,0])
-        Functions.screentext("arial", 80, "highscore", display_width / 2, display_height - 400, Colors.black)
-        Functions.button("Terug",700,550,100,50,Colors.red,Colors.bright_red,intro)
-        pygame.display.update()
+        while not quitgame():
+            gameDisplay.blit(Images.highscoreMenu,[0,0])
+            Functions.screentext("arial", 80, "Highscore", display_width / 2, display_height - 430, Colors.black)
+            heighthighscore = 300
+            Functions.screentext("Arial", 40, "Name", 220, display_height - 340, Colors.bright_blue)
+            Functions.screentext("Arial", 40, "Wins", 360, display_height - 340, Colors.green)
+            Functions.screentext("Arial", 40, "Loses", 510, display_height - 340, Colors.red)
+            Functions.screentext("Arial", 30, "KD Ratio", 630, display_height - 340, Colors.bright_yellow)
+            #highscore_list = DB.result
+            for row in DB.rows:
+                #print(len(DB.rows))
+                if int(len(DB.rows)) <= 11:
+                    res =                    str(row[1])
+                    res += '                   '+str(row[2])
+                    res += '                   '+str(row[3])
+                    #print(len(row[1]))
 
+                    if row[2] != 0 and row[3] != 0:
+                        res += '             '+str(format(row[2] / (row[3]), '.2f'))
+                    else:
+                        res += '           '+str(row[2])
 
+                Functions.screentext("arial", 25,res, display_width / 2, display_height - heighthighscore, Colors.black)
+                heighthighscore -=25
+
+            Functions.button("Terug",700,550,100,50,Colors.red,Colors.bright_red,intro)
+            pygame.display.update()
 
 def rules():
     while not quitgame():
@@ -132,6 +152,8 @@ def player1():
         Functions.button("Next", 700, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player2)
         Functions.screentext("arial", 50, "  Player 1 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player1, display_width/2, display_height/2, Colors.white)
+        
+        checkName()
         pygame.display.update()
 
 saved_player2 = ""
@@ -159,9 +181,25 @@ def player2():
         Functions.button("previous", 0, 550, 100, 50, Colors.yellow, Colors.bright_yellow, player1)
         Functions.screentext("arial", 50, "  Player 2 name:", display_width/2, display_height/3.5, Colors.white)
         Functions.screentext("arial", 50, player2, display_width/2, display_height/2, Colors.white)
-
+        
+        checkName()
         pygame.display.update()
+        
+def checkName():
+    loop = True
+    while loop:
+        for row in DB.rows:
+            #print(saved_player1,row[1])
+            if str(saved_player1) == str(row[1]):
+                print("Gelijk!")
+                loop = False
+            elif str(saved_player2) == str(row[2]):
+                print("Gelijk!")
+                loop = False
 
+            else:
+                loop = False
+        
 class Player():
     def __init__(self):
         self.active_player = 1
