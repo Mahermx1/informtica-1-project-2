@@ -71,7 +71,6 @@ def high_score():
         Functions.screentext("Arial", 40, "Loses", 510, display_height - 340, Colors.red)
         Functions.screentext("Arial", 30, "KD Ratio", 630, display_height - 340, Colors.bright_yellow)
         #highscore_list = DB.result
-        spaces = '               '
         for row in DB.rows:
             res =                    str(row[1])
             res += '               '+str(row[2])
